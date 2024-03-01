@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="container">
+    <h1>TAREAS</h1>
+
+    {% for task in tasks %}
+
+    prueba
+    <div>
+        <h1>{{task.title}}</h1>
+        {% if task.done == False %}
+            <p class="">Tarea pendiente</p>
+        {% else %}
+            <p>Tarea realizada</p>
+        {% endif %}
+        <p>{{task.description}}</p>
+        <p>Project: {{task.project}}</p>
+        <div>
+            <table>
+                <tr>
+                    <th>
+                        <form action="{% url 'delete_tasks' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <br>
+                            <button>
+                                Eliminar 
+                            </button>
+                        </form>
+                    </th>
+                    <th>
+                        <button onclick="window.location.href=`{% url 'task_detail' task.id %} `">Actualizar</button>
+                    </th>
+                    {% if task.done == False %}
+                        <th>
+                            <form action="{% url 'complete_task' task.id %}" method="POST">
+                                {% csrf_token %}
+                                <br>
+                                <button>
+                                    Pendiente 
+                                </button>
+                            </form>
+                        </th>
+                    {% else %}
+                        <th>
+                            <form action="{% url 'cancelar_task' task.id %}" method="POST">
+                                {% csrf_token %}
+                                <br>
+                                <button>
+                                        Cancelar
+                                    </button>
+                                </form>
+                            </th>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+    </div>
+
+{% endfor %}
+    
+</body>
+</html>
+
+{% endblock %}
+

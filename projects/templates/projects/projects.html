@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="container">
+    <h1>Projects</h1>
+
+    {% for project in projects %}
+    <article class="card">
+        <a href="{% url 'project_detail' project.id %}">
+            <h1>{{project.name}}</h1>
+        </a>
+    </article>
+    {% endfor%}
+</body>
+</html>
+{% endblock %}
