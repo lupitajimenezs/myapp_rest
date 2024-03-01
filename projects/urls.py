@@ -10,7 +10,7 @@ router.register("api/tasks", TaskViewSet, "tasks")
 urlpatterns = router.urls
 
 urlpatterns += [
-    path('index/', views.index),
+    path('index/', views.index, name="index"),
     path('hello/<str:username>', views.hello, name="hello"),
     path('projects/', views.projects, name="projects"),
     path('projects/<int:id>', views.project_detail, name="project_detail"),
